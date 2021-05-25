@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import absoluteUrl from 'utils/absolute-url';
 
 export type ProductShowPageProps = {
     id: number;
@@ -26,7 +27,7 @@ export default function ProductShowPage(props: ProductShowPageProps): JSX.Elemen
 
 export async function getStaticPaths() {
     // Call an external API endpoint to get posts
-    const res = await fetch('http://localhost:3000/api/products/all');
+    const res = await fetch(absoluteUrl(`/api/products/all`));
     const products = await res.json();
 
     // Get the paths we want to pre-render based on posts
@@ -41,7 +42,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (props) => {
     if (!props.params) throw Error('My Error');
-    const res = await fetch(`http://localhost:3000/api/products/${props.params.slug}`);
+    const res = await fetch(absoluteUrl(`/api/products/${props.params.slug}`));
     const data = await res.json();
 
     return {

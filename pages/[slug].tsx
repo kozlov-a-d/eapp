@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import absoluteUrl from 'utils/absolute-url';
 import Head from 'next/head';
 
 export type TextPage = {
@@ -31,7 +32,7 @@ export type PagesProps = {
 
 export async function getStaticPaths() {
     // Call an external API endpoint to get posts
-    const res = await fetch('http://localhost:3000/api/pages/all');
+    const res = await fetch(absoluteUrl(`/api/pages/all`));
     const pages = await res.json();
 
     // Get the paths we want to pre-render based on posts
@@ -46,7 +47,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (props) => {
     if (!props.params) throw Error('My Error');
-    const res = await fetch(`http://localhost:3000/api/pages/${props.params.slug}`);
+    const res = await fetch(absoluteUrl(`/api/pages/${props.params.slug}`));
     const data = await res.json();
 
     return {
