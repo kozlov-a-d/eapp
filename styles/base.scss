@@ -1,0 +1,209 @@
+// BASE ================================================================================================================
+* {
+    box-sizing: border-box;
+    outline: none !important;
+    scroll-behavior: smooth;
+}
+
+#__next{
+    height: 100vh;
+    flex: 1 0 auto;
+    flex-direction: column;
+    display: flex;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    max-height: 999999px;
+    max-width: 100%;
+    width: 100%;
+    background: var(--color);
+}
+
+.social-icon {
+    text-align: center;
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0;
+        text-decoration: none;
+        margin: 0 12px 5px;
+        color: $color-base-invert;
+
+        &::before {
+            font-size: 16px;
+        }
+    }
+}
+
+.title_field {
+    display: none !important;
+}
+
+.pswp__bg {
+    opacity: 0.7 !important;
+}
+
+.icon-svg {
+    width: 1em;
+    height: 1em;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.scroll-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 100;
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
+
+    &:disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.disabled,
+.is-disabled {
+    cursor: not-allowed !important;
+}
+
+/*************************************************************************************/
+
+.pswp__button--arrow--left:before,
+.pswp__button--arrow--right:before,
+.pswp__button--close,
+.pswp__button--fs {
+    // background-image: url(~images/default-skin.png);
+}
+
+.pswp__button {}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: $border-radius-block;
+    background: $color-secondary;
+    color: $color-heading;
+    text-transform: uppercase;
+    width: auto;
+    height: 36px;
+    margin: 0;
+    padding: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+
+    @include media-max($sm) {
+        font-size: 13px;
+        line-height: 16px;
+        padding: 0 6px;
+        height: 24px;
+    }
+}
+
+
+.whatsapp-fixed-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 95px;
+    right: 15px;
+    text-decoration: none;
+    background-color: #0dc152;
+    border-radius: 50%;
+    padding: 14px;
+    box-sizing: border-box;
+    animation-name: ok_bounceInUp;
+    transform: translate(0, 120px);
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    box-shadow: 0 0 30px rgba(0,0,0,.3);
+    z-index: 99;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        opacity: 0;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #0dc152;
+        border-radius: 55px;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        animation: ok_widgetPulse infinite 1.5s;
+        box-sizing: border-box;
+    }
+}
+
+@keyframes ok_widgetPulse {
+    0% {
+        opacity: 0
+    }
+    50% {
+        transform: scale(1, 1);
+        opacity: 1
+    }
+    100% {
+        transform: scale(2, 2);
+        opacity:0
+    }
+}
+
+@keyframes ok_bounceInUp {
+    0%, 60%, 75%, 90%, to {
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+    }
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0)
+    }
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0)
+    }
+    75% {
+        transform: translate3d(0, 10px, 0)
+    }
+    90% {
+        transform:translate3d(0,-5px,0)
+    }
+    to{
+        transform:translateZ(0);
+    }
+}
+
+@include media-min($md){
+    .whatsapp-fixed-btn{
+        display: none !important;
+    }
+}

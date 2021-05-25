@@ -1,0 +1,32 @@
+.block { 
+    @include block(80px, 20px); 
+    // background: #f5f5f5;
+
+    &__container {
+    }
+    
+    &__header {
+        // background: #c7c5c5;
+
+        
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    &__note{
+    }
+
+    &__content {
+        // background: #c7c5c5;
+    }
+
+    &__list {
+    }
+
+
+    &__item {
+        // background: #dddddd;
+    }
+}

@@ -1,0 +1,122 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.header {
+    position: relative;
+    background: #fff;
+    text-align: center;
+
+    @include media-max($mobile) {
+        display: flex;
+        flex-direction: column-reverse;
+        border-top: none;
+    }
+
+    &__container {
+        @include l-container;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0;
+
+
+        @include media-min($mobile) {
+            padding: 23px 0;
+        }
+    }
+
+    &__logo {
+        display: block;
+        margin: 0 auto 0 0;
+
+        @include media-max($mobile) {
+            position: absolute;
+            top: 4px;
+            left: 20px;
+            width: 100px;
+        }
+
+        img,
+        picture {
+            display: block;
+            width: 200px;
+            max-width: 100%;
+        }
+    }
+
+    &__location {
+        display: none;
+
+        p {
+            margin-bottom: 0;
+        }
+
+        @include media-min($mobile) {
+            display: block;
+            margin-right: 60px;
+            // background: url('~images/icons/location.svg') left center no-repeat;
+            background-size: 18px 24px;
+            padding: 3px 0 3px 33px;
+            text-align: left;
+            color: $color-heading;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        @include media-interval($mobile, 1070px) {
+            margin-left: 20px;
+            max-width: 268px;
+        }
+    }
+
+    &__email {
+        display: none;
+
+        @include media-min($mobile) {
+            display: block;
+            margin-right: 50px;
+            // background: url('~images/icons/email.svg') left center no-repeat;
+            background-size: 21px 15px;
+            padding-left: 35px;
+        }
+
+        &:hover {
+            a {
+                opacity: 0.7;
+                border-color: transparent;
+            }
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: $color-heading;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+
+    &__cart {
+        position: relative;
+
+        @include media-max($mobile) {
+            position: absolute;
+            top: 12px;
+            right: 25px;
+            z-index: 5;
+            margin-left: 0;
+        }
+    }
+
+    &__menu {
+        &.is-fixed {
+            @include media-max($md) {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                width: 100%;
+            }
+        }
+    }
+}

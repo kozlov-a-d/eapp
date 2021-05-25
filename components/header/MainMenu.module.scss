@@ -1,0 +1,285 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.main-menu {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 100%;
+    background: $color-heading;
+
+    /**
+     *  Стили для десктопа
+     */
+
+    @include media-max(($content-width + $content-gap * 2)) {
+        &>ul {
+            margin: 0 $content-gap !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+
+    @include media-min($mobile) {
+
+        // прячем кнопку показывающую меню на мобильном
+        [data-menu-mobile--switcher-btn] {
+            display: none;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            &.is-dubler-root {
+                li {
+                    padding: 0 20px;
+                }
+            }
+        }
+
+        &>ul {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            width: 100%;
+            max-width: $content-width;
+
+            >li {
+                &:first-child {
+
+                    >a,
+                    >span {
+                        padding-left: 0;
+                    }
+                }
+
+                &.-extraBar {
+                    padding-right: 0;
+                }
+
+            }
+        }
+
+        li {
+            margin: 0;
+
+            &.-has-dropdown {
+                position: relative;
+
+                // показывает выпадашку
+                &:hover div {
+                    @include smooth-dropdown-show();
+                }
+            }
+
+            &.-hidden {
+                display: none;
+            }
+
+            &.is-active>a,
+            &>a:hover,
+            &.is-active>span,
+            &>span:hover {
+                color: $color-secondary;
+            }
+
+            &.-extraBar {
+                cursor: pointer;
+
+                div {
+                    right: 0;
+                    left: auto;
+                }
+
+                // кнопка, появляющаяся если меню не влазит целиком
+                &>button {
+                    display: block;
+                    position: relative;
+                    margin: 24px 20px 24px;
+                    width: 20px;
+                    height: 2px;
+                    border: none;
+                    background: #fff;
+                    padding: 0;
+                    cursor: pointer;
+                    transition: $transition-default;
+                    font-size: 0;
+
+                    &::before,
+                    &::after {
+                        display: block;
+                        position: absolute;
+                        left: 0;
+                        z-index: 3;
+                        width: 20px;
+                        height: 2px;
+                        background: #fff;
+                        transition: $transition-default;
+                        content: '';
+                        pointer-events: none;
+                    }
+
+                    &::before {
+                        top: -7px;
+                    }
+
+                    &::after {
+                        top: 7px;
+                    }
+                }
+
+                &:hover {
+                    &>button {
+                        background: $color-primary;
+
+                        &::before,
+                        &::after {
+                            background: $color-primary;
+                        }
+                    }
+                }
+            }
+        }
+
+        a,
+        span {
+            display: block;
+            position: relative;
+            //padding: 0 40px;
+            padding: 0;
+            cursor: pointer;
+            transition: $transition-default;
+            text-decoration: none;
+            // text-transform: uppercase;
+            line-height: 60px;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        span {
+            cursor: default;
+        }
+
+        // выпадашки
+        div {
+            display: block;
+            position: absolute;
+            top: calc(100%);
+            left: -20px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0px 8px 30px rgba(34, 20, 8, .2);
+            // min-width: 256px;
+            //background: $color-primary;
+            background: #fff;
+            padding: 10px 30px 10px 0;
+            overflow: hidden;
+
+            @include smooth-dropdown-hide(true) {
+                //  transition: transform .2s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                transition: transform .15s ease-in, opacity .15s ease-in;
+            }
+
+            ul {}
+
+            li {
+
+                &.is-active>a,
+                &:hover>a,
+                &.is-active>span,
+                &:hover>span {
+                    //color: $color-heading;
+                    color: $color-secondary;
+                }
+            }
+
+            a {
+                justify-content: left;
+                padding: 10px 15px 10px 20px;
+                text-align: left;
+                line-height: 22px;
+                letter-spacing: normal;
+                white-space: normal;
+                white-space: nowrap;
+                color: $color-heading;
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+
+        li:nth-last-child(2) div {
+            right: -57px;
+            left: unset;
+        }
+    }
+
+    /**
+     *  Стили для адатпива
+     */
+    @include media-max($mobile) {
+        padding: 10px 60px 10px 107px;
+
+        [data-menu-mobile--switcher-btn] {
+            display: block;
+            position: relative;
+            z-index: 250;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            font-size: 0;
+
+            span {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -1px 0 0 -11px;
+                width: 18px;
+                height: 2px;
+                border: none;
+                background: #fff;
+
+                &::before {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    margin: -7px 0 0 0;
+                    width: 18px;
+                    height: 2px;
+                    background: #fff;
+                    transition: .2s;
+                    content: '';
+                }
+
+                &::after {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    margin: 7px 0 0 0;
+                    width: 18px;
+                    height: 2px;
+                    background: #fff;
+                    transition: .2s;
+                    content: '';
+                }
+            }
+        }
+
+        ul {
+            display: none;
+        }
+    }
+
+}

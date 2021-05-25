@@ -1,0 +1,162 @@
+@mixin btn() {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    height: $btn-height;
+    max-width: 100%;
+    padding: 0 $btn-padding;
+    border: none;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    font-weight: $btn-font-weight;
+    line-height: $btn-height;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    background-position: center center;
+    cursor: pointer;
+    transition: $transition-default;
+}
+
+@mixin btn-color($color-default, $color-hover: $color-default) {
+    color: $color-default;
+
+    &:hover {
+        color: $color-hover;
+    }
+}
+
+@mixin btn-fill($color-default, $color-hover: $color-default) {
+    background-color: $color-default;
+
+    @if $color-hover !=$color-default {
+        &:hover {
+            // box-shadow: inset 0 $btn-height*-1 $color-hover;
+            background-color: $color-hover;
+        }
+    }
+}
+
+@mixin btn-border($color-default, $color-hover: $color-default) {
+    border: $btn-border-width solid $color-default;
+    padding: 0 $btn-padding - $btn-border-width;
+    line-height: $btn-height - 2 * $btn-border-width;
+
+    @if $color-hover !=$color-default {
+        &:hover {
+            border-color: $color-hover;
+        }
+    }
+}
+
+@mixin btn-center() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+}
+
+@mixin btn-fullwidth() {
+    width: 100%;
+}
+
+@mixin btn-primary() {
+    @include btn;
+    @include btn-fill($color-primary, $color-secondary);
+    @include btn-color(#fff);
+}
+
+@mixin btn-secondary() {
+    @include btn;
+    background: $color-secondary;
+    // @include btn-fill($color-secondary, $color-secondary-dark);
+    @include btn-color(#fff);
+
+    &:hover {
+        box-shadow: inset 0 $btn-height*-1 rgba(0, 0, 0, 0.1);
+        color: #ffffff;
+    }
+}
+
+@mixin btn-bordered() {
+    @include btn;
+    background-color: transparent;
+    color: #798087;
+    line-height: $btn-height - $btn-border-width*2;
+    border: $btn-border-width solid #798087;
+
+    &:hover {
+        color: #fff;
+        border-color: $color-primary;
+        background: $color-primary;
+    }
+}
+
+@mixin btn-has-arrow {
+    &::after {
+        content: url("~images/icons/arrow.svg");
+        display: inline-block;
+        vertical-align: middle;
+        // margin-left: 10px;
+        margin: 3px 0 0 10px;
+        padding-top: 5px;
+    }
+
+    &:hover {
+        @include media-min($mobile){
+            &::after {
+                filter: brightness(100);
+            }
+        }
+    }
+}
+
+@mixin btn-cart {
+    &::before {
+        content: url("~images/icons/cart-btn.svg");
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        margin: 3px 10px 0 0;
+        line-height: 1;
+    }
+
+    &:hover {
+        &::before {
+            filter: brightness(100);
+        }
+    }
+}
+
+
+
+@mixin btn-inline {
+    color: $color-primary;
+    height: auto;
+    line-height: 1.5;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+
+    &::after,
+    &::before {
+        // filter: brightness(0) invert(21%) sepia(67%) saturate(5268%) hue-rotate(224deg) brightness(99%) contrast(99%);
+    }
+
+    &:hover {
+        color: $color-secondary;
+
+        &::before,
+        &::after {
+            filter: brightness(0) invert(80%) sepia(31%) saturate(713%) hue-rotate(351deg) brightness(101%) contrast(101%);
+        }
+    }
+}
+
+@mixin btn-whatsapp() {
+    @include btn;
+    @include btn-fill($color-whatsapp, $color-whatsapp-hover);
+    @include btn-color(#fff);
+}

@@ -1,0 +1,20 @@
+@use 'sass:math';
+
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.products-list {
+    @include grid(30px);
+
+    &-item {
+        @include grid-col(1, 30px);
+
+        @include media-min($md) {
+            @include grid-col(math.div(1, 2), 30px);
+        }
+
+        @include media-min($lg) {
+            @include grid-col(math.div(1, 3), 30px);
+        }
+    }
+}
