@@ -3,7 +3,8 @@ import Block from 'components/content-block/Block';
 import { GetStaticProps } from 'next';
 import { ProductsListItemProps } from 'components/products/ProductsListItem';
 import ProductsList from 'components/products/ProductsList';
-import absoluteUrl from 'utils/absolute-url';
+
+import { ProductList } from 'db/products';
 
 const fixtureData = {
     title: 'EApp',
@@ -35,12 +36,9 @@ export default function HomePage(props: HomePageProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const res = await fetch(absoluteUrl(`/api/products/all`));
-    const data = await res.json();
-
     return {
         props: {
-            productsData: data,
+            productsData: ProductList,
         },
         revalidate: 1,
     };
