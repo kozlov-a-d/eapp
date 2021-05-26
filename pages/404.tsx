@@ -1,6 +1,7 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 
-export default function Custom404(): JSX.Element {
+const Page404: NextPage = () => {
     return (
         <>
             <Head>
@@ -11,4 +12,6 @@ export default function Custom404(): JSX.Element {
             <h1>404 Not found</h1>
         </>
     );
-}
+};
+
+export default Page404;

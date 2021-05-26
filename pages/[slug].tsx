@@ -1,14 +1,14 @@
-import { GetStaticProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 
 import { Pages } from 'db/pages';
 
-export type TextPage = {
+interface Props {
     heading: string;
     content: string;
-};
+}
 
-export default function TextPage(props: TextPage): JSX.Element {
+const TextPage: NextPage<Props> = (props) => {
     // console.log(props);
     return (
         <>
@@ -21,7 +21,7 @@ export default function TextPage(props: TextPage): JSX.Element {
             <p>{props.content}</p>
         </>
     );
-}
+};
 
 export type PagesProps = {
     id: number;
@@ -32,13 +32,10 @@ export type PagesProps = {
 };
 
 export async function getStaticPaths() {
-    // Get the paths we want to pre-render based on posts
     const paths = Pages.map((pages: PagesProps) => ({
         params: { slug: pages.slug },
     }));
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
     return { paths, fallback: false };
 }
 
@@ -54,3 +51,5 @@ export const getStaticProps: GetStaticProps = async (props) => {
         revalidate: 1,
     };
 };
+
+export default TextPage;

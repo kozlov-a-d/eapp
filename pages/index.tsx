@@ -1,6 +1,6 @@
+import { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Block from 'components/content-block/Block';
-import { GetStaticProps } from 'next';
 import { ProductsListItemProps } from 'components/products/ProductsListItem';
 import ProductsList from 'components/products/ProductsList';
 
@@ -11,11 +11,11 @@ const fixtureData = {
     h1: 'Welcome to',
 };
 
-export type HomePageProps = {
+interface Props {
     productsData: Array<ProductsListItemProps>;
-};
+}
 
-export default function HomePage(props: HomePageProps): JSX.Element {
+const HomePage: NextPage<Props> = (props) => {
     return (
         <>
             <Head>
@@ -33,7 +33,12 @@ export default function HomePage(props: HomePageProps): JSX.Element {
             </Block>
         </>
     );
-}
+};
+
+// Page.getInitialProps = async ({ req }) => {
+//   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
+//   return { userAgent }
+// }
 
 export const getStaticProps: GetStaticProps = async () => {
     return {
@@ -43,3 +48,5 @@ export const getStaticProps: GetStaticProps = async () => {
         revalidate: 1,
     };
 };
+
+export default HomePage;

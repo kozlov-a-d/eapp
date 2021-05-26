@@ -1,17 +1,17 @@
-import { GetStaticProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 
 import { ProductList } from 'db/products';
 
-export type ProductShowPageProps = {
+interface Props {
     id: number;
     title: string;
     link: string;
     slug: string;
     price: number;
-};
+}
 
-export default function ProductShowPage(props: ProductShowPageProps): JSX.Element {
+const ProductShowPage: NextPage<Props> = (props) => {
     return (
         <>
             <Head>
@@ -23,16 +23,13 @@ export default function ProductShowPage(props: ProductShowPageProps): JSX.Elemen
             <h2>{props.price}</h2>
         </>
     );
-}
+};
 
 export async function getStaticPaths() {
-    // Get the paths we want to pre-render based on posts
-    const paths = ProductList.map((product: ProductShowPageProps) => ({
+    const paths = ProductList.map((product: Props) => ({
         params: { slug: product.slug },
     }));
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
     return { paths, fallback: false };
 }
 
@@ -48,3 +45,5 @@ export const getStaticProps: GetStaticProps = async (props) => {
         revalidate: 1,
     };
 };
+
+export default ProductShowPage;
