@@ -17,14 +17,16 @@ export type ProductsListItemProps = {
 const ProductsListItem: React.FC<ProductsListItemProps> = (props: ProductsListItemProps) => {
     const store = useCartStore();
     const product = props;
-    const inputCountRef = useRef();
+    const inputCountRef = useRef<HTMLInputElement | null>(null);
 
-    function addToCartHandler(event: Event): void {
+    function handlerAddToCart(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        const count = parseInt(inputCountRef.current);
+        const current = inputCountRef.current;
+        if (!current) return;
+        const count = parseInt(current.value);
         if (!count) return;
         store.addItem({ ...product, count });
-        inputCountRef.current = '0';
+        current.value = '1';
     }
 
     return (
@@ -45,9 +47,9 @@ const ProductsListItem: React.FC<ProductsListItemProps> = (props: ProductsListIt
                     {product.priceFull && <span className={styles['products-list-item__price--old']}>${product.priceFull}</span>}
                 </div>
                 <div className={styles['products-list-item__footer']}>
-                    <form className={styles['product-actions']} onSubmit={addToCartHandler}>
+                    <form className={styles['product-actions']} onSubmit={handlerAddToCart}>
                         <div className={styles['product-actions__count']}>
-                            <input ref={inputCountRef} value={inputCountRef.current} type="text" pattern="^[ 0-9]+$" />
+                            <input ref={inputCountRef} defaultValue="1" type="number" pattern="^[ 0-9]+$" />
                         </div>
                         <button className={styles['product-actions__btn']}>Add to Cart</button>
                     </form>
