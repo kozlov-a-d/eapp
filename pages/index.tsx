@@ -23,9 +23,11 @@ const HomePage: NextPage<Props> = (props) => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <h1>{fixtureData.h1}</h1>
+
+            <div className="l-container">
+                <h1>{fixtureData.h1}</h1>
+            </div>
             <Block h2="Best Products">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates similique ad incidunt dolore sapiente blanditiis.</p>
                 <ProductsList items={props.productsData} />
             </Block>
             <Block>

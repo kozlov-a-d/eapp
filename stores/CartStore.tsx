@@ -46,6 +46,7 @@ class CartStore {
 const CartStoreContext = createContext<CartStore>(new CartStore());
 
 const CartStoreProvider: React.FC<{ store: CartStore }> = ({ store, children }) => {
+    console.log('CartStoreProvider');
     return <CartStoreContext.Provider value={store}>{children}</CartStoreContext.Provider>;
 };
 

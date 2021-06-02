@@ -17,8 +17,11 @@ const TextPage: NextPage<Props> = (props) => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <h1>{props.heading}</h1>
-            <p>{props.content}</p>
+
+            <div className="l-container">
+                <h1>{props.heading}</h1>
+                <p>{props.content}</p>
+            </div>
         </>
     );
 };

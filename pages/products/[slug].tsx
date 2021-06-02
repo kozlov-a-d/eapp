@@ -19,8 +19,11 @@ const ProductShowPage: NextPage<Props> = (props) => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <h1>{props.title}</h1>
-            <h2>{props.price}</h2>
+
+            <div className="l-container">
+                <h1>{props.title}</h1>
+                <h2>{props.price}</h2>
+            </div>
         </>
     );
 };

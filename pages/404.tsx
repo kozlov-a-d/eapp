@@ -9,7 +9,10 @@ const Page404: NextPage = () => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <h1>404 Not found</h1>
+
+            <div className="l-container">
+                <h1>404 Not found</h1>
+            </div>
         </>
     );
 };
